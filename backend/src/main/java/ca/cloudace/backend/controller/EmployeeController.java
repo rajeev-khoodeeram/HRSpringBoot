@@ -1,6 +1,7 @@
 package ca.cloudace.backend.controller;
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +18,7 @@ import ca.cloudace.backend.service.EmployeeService;
 
 @RestController
 @RequestMapping("/api/employees")
-@CrossOrigin(origins = "*") // WE WILL SET THIS LATER 
+@CrossOrigin(origins = "http://localhost:5173") // WE WILL SET THIS LATER
 public class EmployeeController {
     private final EmployeeService employeeService;
 
@@ -37,8 +38,8 @@ public class EmployeeController {
     }
 
     @PostMapping
-    public Employee createEmployee(@RequestBody Employee employee) {
-        return employeeService.saveEmployee(employee);
+    public ResponseEntity<Employee> createEmployee(@RequestBody Employee employee) {
+        return ResponseEntity.ok(employeeService.saveEmployee(employee));
     }
 
     @PutMapping("/{id}")
